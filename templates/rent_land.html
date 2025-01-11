@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/free-vector/hand-drawn-rising-house-prices-illustration_23-2150815133.jpg?t=st=1736177129~exp=1736180729~hmac=ba6cc563ac97df088911b7f3ded651df5c439916fd548e587eefb8c1b0023afe&w=740'); /* Replace with your image URL */
+            background-size: flex;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .container:hover {
+            transform: scale(1.02); /* Slightly enlarge on hover */
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group select, .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group select:focus, .form-group input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #4CAF50; /* green color for positive results */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>House Rent Prediction</h2>
+        <form action="/predict" id="houseForm" method="post">
+            <div class="form-group">
+               <!-- PROPERTY TYPE -->
+        <label for="property_type">Property Type:</label>
+        <select id="property_type" name="property_type" required>
+            <option value="0">Flat</option>
+            <option value="1">House</option>
+        </select>
+        <br><br>
+
+        <!-- BHK -->
+        <label for="bhk">BHK:</label>
+        <input type="number" id="bhk" name="bhk" min="1" required>
+        <br><br>
+
+        <!-- SIZE -->
+        <label for="size">Size (sq. ft.):</label>
+        <input type="number" id="size" name="size" min="1" required>
+        <br><br>
+
+        <!-- FLOOR -->
+        <label for="floor">Floor:</label>
+        <input type="number" id="floor" name="floor" min="0" required>
+        <br><br>
+
+        <!-- AREA TYPE -->
+        <label for="area_type">Area Type:</label>
+        <select id="area_type" name="area_type" required>
+            <option value="0">Super Area</option>
+            <option value="1">Carpet Area</option>
+            <option value="2">Built Area</option>
+        </select>
+        <br><br>
+
+        <!-- STATE -->
+        <label for="state">State:</label>
+        <select id="state" name="state" required>
+            <option value="0">West Bengal</option>
+            <option value="1">Maharashtra</option>
+            <option value="2">Karnataka</option>
+            <option value="3">Delhi</option>
+            <option value="4">Tamil Nadu</option>
+            <option value="5">Telangana</option>
+        </select>
+        <br><br>
+
+        <!-- FURNISHING STATUS -->
+        <label for="furnishing_status">Furnishing Status:</label>
+        <select id="furnishing_status" name="furnishing_status" required>
+            <option value="0">Unfurnished</option>
+            <option value="1">Semi-Furnished</option>
+            <option value="2">Furnished</option>
+        </select>
+        <br><br>
+
+        <!-- TENANT PREFERRED -->
+        <label for="tenant_preferred">Tenant Preferred:</label>
+        <select id="tenant_preferred" name="tenant_preferred" required>
+            <option value="0">Bachelors</option>
+            <option value="1">Family</option>
+            <option value="2">Bachelors/Family</option>
+        </select>
+        <br><br>
+
+        <!-- NO. OF BATHROOMS -->
+        <label for="bathrooms">No. of Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" min="1" required>
+        <br><br>
+
+        <!-- POINT OF CONTACT -->
+        <label for="point_of_contact">Point of Contact:</label>
+        <select id="point_of_contact" name="point_of_contact" required>
+            <option value="0">Contact Owner</option>
+            <option value="1">Contact Agent</option>
+            <option value="2">Contact Builder</option>
+        </select>
+        <br><br>
+            <button type="submit" class="btn"> Predict the Price</button>
+        </form>
+    </div>
+</body>
+</html>

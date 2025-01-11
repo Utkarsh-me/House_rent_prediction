@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/free-vector/landing-page-concept-house-searching_52683-26005.jpg?t=st=1736185084~exp=1736188684~hmac=ba75ed237e9cc80cbf86e4ecfce5bfdf27e613c25461ef16de9a2fe44348e70c&w=900'); /* Background image */
+            background-size: cover; /* Changed to cover for better scaling */
+            background-position: flex;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 12px; /* Slightly larger border radius */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8); /* Enhanced shadow for depth */
+            padding: 30px; /* Increased padding for better spacing */
+            max-width: 400px;
+            width: 90%; /* Responsive width */
+            text-align: center;
+            margin: 10px auto; /* Centered with margin */
+            transition: transform 0.3s; /* Smooth scaling effect */
+	    
+        }
+        .container:hover {
+            transform: scale(1.02); /* Slightly enlarge on hover */
+        }
+        h1 {
+            color: #333;
+            font-size: 1.8rem; /* Increased font size */
+            margin-bottom: 20px; /* Added margin for spacing */
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50; /* Green color for positive results */
+        }
+        .note {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px; /* Increased padding for a larger button */
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px); /* Slightly lift the button on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if prediction %}
+        <div class="result">The Rent of property may be: ₹{{ prediction }} </div>
+        {% endif %}
+    
+        {% if error %}
+        <div class="result" style="color: red;">Something went wrong, please try again later</div>
+        {% endif %}
+    </div>
+</body>
+</html>
