@@ -20,5 +20,3 @@ tzdata==2024.1
 Werkzeug==3.0.3
 firebase_admin
 requests==2.32.3
-os
-json
