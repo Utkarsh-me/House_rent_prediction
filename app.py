@@ -15,7 +15,7 @@ FIREBASE_KEY = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_predicti
 key_data = json.loads(os.getenv("FIREBASE_KEY"))
 cred = credentials.Certificate(key_data)
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://your-project-id-default-rtdb.asia-southeast1.firebasedatabase.app/'
+    'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
 })
 
 model = pickle.load(open('house_rent.pkl', 'rb'))
