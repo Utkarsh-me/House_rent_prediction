@@ -6,24 +6,17 @@ from flask import request
 import firebase_admin
 from firebase_admin import credentials, db
 import requests
+import os
+import json
 
 # URL of the JSON file on GitHub (raw URL)
-GITHUB_JSON_URL = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/refs/heads/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json"
+FIREBASE_KEY = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/refs/heads/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json"
 
-# Fetch the JSON file
-response = requests.get(GITHUB_JSON_URL)
-if response.status_code == 200:
-    # Save the file locally
-    with open("firebase_key.json", "wb") as f:
-        f.write(response.content)
-
-    # Initialize Firebase Admin SDK
-    cred = credentials.Certificate("firebase_key.json")
-    firebase_admin.initialize_app(cred, {'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'})
-
-else:
-    raise Exception(f"Failed to fetch JSON file: {response.status_code}")
-
+key_data = json.loads(os.getenv("FIREBASE_KEY"))
+cred = credentials.Certificate(key_data)
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://your-project-id-default-rtdb.asia-southeast1.firebasedatabase.app/'
+})
 
 model = pickle.load(open('house_rent.pkl', 'rb'))
 
