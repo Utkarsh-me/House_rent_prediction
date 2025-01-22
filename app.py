@@ -5,6 +5,7 @@ import numpy as np
 from flask import request
 import firebase_admin
 from firebase_admin import credentials, db
+import requests
 
 # URL of the JSON file on GitHub (raw URL)
 GITHUB_JSON_URL = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/refs/heads/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json"
