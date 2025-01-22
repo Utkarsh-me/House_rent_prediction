@@ -6,7 +6,7 @@ from flask import request
 import firebase_admin
 from firebase_admin import credentials, db
 
-cred = credentials.Certificate('https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/refs/heads/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json')
+cred = credentials.Certificate('https://github.com/Utkarsh-me/House_rent_prediction/blob/c933504e061b4e62b4b555ee3416926d23ed8e72/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json')
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'})
 
 
