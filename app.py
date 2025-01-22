@@ -6,7 +6,7 @@ from flask import request
 import firebase_admin
 from firebase_admin import credentials, db
 
-cred = credentials.Certificate('house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-3e31a22bf3.json')
+cred = credentials.Certificate('house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json')
 firebase_admin.initialize_app(cred, {'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'})
 
 
