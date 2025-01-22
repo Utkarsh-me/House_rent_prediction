@@ -7,7 +7,7 @@ import firebase_admin
 from firebase_admin import credentials, db
 
 # URL of the JSON file on GitHub (raw URL)
-GITHUB_JSON_URL = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/c933504e061b4e62b4b555ee3416926d23ed8e72/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json"
+GITHUB_JSON_URL = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/refs/heads/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-8d9d89150d.json"
 
 # Fetch the JSON file
 response = requests.get(GITHUB_JSON_URL)
