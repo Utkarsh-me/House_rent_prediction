@@ -15,7 +15,7 @@ FIREBASE_KEY = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_predicti
 #response = requests.get(FIREBASE_KEY)
 #key_data = response.json()
 
-cred = credentials.Certificate(os.getenv('FIREBASE_KEY'))
+cred = credentials.Certificate(os.getenv(FIREBASE_KEY))
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
 })
