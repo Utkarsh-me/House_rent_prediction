@@ -9,7 +9,7 @@ import requests
 import os
 import json
 
-FIREBASE_KEY_URL = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
+FIREBASE_KEY_URL = "house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
 response = requests.get(FIREBASE_KEY_URL)
 if response.status_code == 200:
     key_data = response.json()
