@@ -9,11 +9,14 @@ import requests
 import os
 import json
 
-# URL of the JSON file on GitHub (raw URL)
-FIREBASE_KEY = "https://github.com/Utkarsh-me/House_rent_prediction/blob/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
-#FK = os.getenv("FIREBASE_KEY")
-#key_data = json.loads(FIREBASE_KEY)
-cred = credentials.Certificate(FIREBASE_KEY)
+FIREBASE_KEY_URL = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
+response = requests.get(FIREBASE_KEY_URL)
+if response.status_code == 200:
+    key_data = response.json()
+else:
+    raise ValueError("Failed to load Firebase key from URL")
+    
+cred = credentials.Certificate(key_data)
 
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
