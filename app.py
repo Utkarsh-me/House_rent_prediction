@@ -9,14 +9,20 @@ import requests
 import os
 import json
 
-FIREBASE_KEY_URL = "house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
-response = requests.get(FIREBASE_KEY_URL)
-if response.status_code == 200:
-    key_data = response.json()
-else:
-    raise ValueError("Failed to load Firebase key from URL")
+#FIREBASE_KEY_URL = "house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
+#response = requests.get(FIREBASE_KEY_URL)
+#if response.status_code == 200:
+#    key_data = response.json()
+#else:
+#    raise ValueError("Failed to load Firebase key from URL")
     
-cred = credentials.Certificate(key_data)
+#cred = credentials.Certificate(key_data)
+
+FIREBASE_KEY_PATH = os.getenv("https://dashboard.render.com/env-group/evg-cu97ubaj1k6c73f5vbeg")
+if not FIREBASE_KEY_PATH:
+    raise ValueError("FIREBASE_KEY_PATH environment variable not set")
+cred = credentials.Certificate(FIREBASE_KEY_PATH)
+
 
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
