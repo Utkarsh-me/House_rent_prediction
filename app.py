@@ -12,8 +12,8 @@ import json
 # URL of the JSON file on GitHub (raw URL)
 FIREBASE_KEY = "https://raw.githubusercontent.com/Utkarsh-me/House_rent_prediction/refs/heads/main/house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
 #FK = os.getenv("FIREBASE_KEY")
-key_data = json.loads(FIREBASE_KEY)
-cred = credentials.Certificate(key_data)
+#key_data = json.loads(FIREBASE_KEY)
+cred = credentials.Certificate(FIREBASE_KEY)
 
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
