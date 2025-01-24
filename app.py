@@ -18,7 +18,7 @@ import json
     
 #cred = credentials.Certificate(key_data)
 
-FIREBASE_KEY_PATH = os.getenv("https://dashboard.render.com/web/srv-cu18ke5svqrc73epb370/env")
+FIREBASE_KEY_PATH = os.getenv("/etc/secrets/FIREBASE_KEY")
 if not FIREBASE_KEY_PATH:
     raise ValueError("FIREBASE_KEY_PATH environment variable not set")
 cred = credentials.Certificate(FIREBASE_KEY_PATH)
