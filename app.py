@@ -20,10 +20,10 @@ import json
 
 #___________________________________________
 
-#FIREBASE_KEY_PATH = os.getenv("FIREBASE_KEY")
-#if not FIREBASE_KEY_PATH:
-#    raise ValueError("FIREBASE_KEY_PATH environment variable not set")
-#cred = credentials.Certificate(FIREBASE_KEY_PATH)
+FIREBASE_KEY_PATH = os.getenv("FIREBASE_KEY")
+if not FIREBASE_KEY_PATH:
+    raise ValueError("FIREBASE_KEY_PATH environment variable not set")
+cred = credentials.Certificate(FIREBASE_KEY_PATH)
 
 #___________________________________________
 
