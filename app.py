@@ -32,9 +32,15 @@ import json
 
 #___________________________________________
 
-KEY_URL = os.getenv("FIREBASE_KEY")
-key_data = json.loads(KEY_URL)
-cred = credentials.Certificate(key_data)
+key_data = os.getenv("FIREBASE_KEY")
+
+# Replace escaped \n with actual newlines
+key_data = key_data.replace("\\n", "\n")
+
+# Convert to dictionary and initialize Firebase
+firebase_cred = json.loads(key_data)
+cred = credentials.Certificate(firebase_cred)
+
 
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
