@@ -27,8 +27,13 @@ import json
 
 #___________________________________________
 
-key_url = os.environ.get('FIREBASE_KEY')
-cred = credentials.Certificate(key_url)
+#key_url = os.environ.get('FIREBASE_KEY')
+#cred = credentials.Certificate(key_url)
+
+#___________________________________________
+
+key_data = json.loads(os.getenv('FIREBASE_KEY'))
+cred = credentials.Certificate(key_data)
 
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
