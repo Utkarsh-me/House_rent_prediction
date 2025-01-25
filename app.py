@@ -20,10 +20,10 @@ import json
 
 #___________________________________________
 
-FIREBASE_KEY_PATH = os.getenv("FIREBASE_KEY")
-if not FIREBASE_KEY_PATH:
-    raise ValueError("FIREBASE_KEY_PATH environment variable not set")
-cred = credentials.Certificate(FIREBASE_KEY_PATH)
+#FIREBASE_KEY_PATH = os.getenv("FIREBASE_KEY")
+#if not FIREBASE_KEY_PATH:
+#   raise ValueError("FIREBASE_KEY_PATH environment variable not set")
+#cred = credentials.Certificate(FIREBASE_KEY_PATH)
 
 #___________________________________________
 
@@ -32,7 +32,8 @@ cred = credentials.Certificate(FIREBASE_KEY_PATH)
 
 #___________________________________________
 
-key_data = json.loads(os.getenv('FIREBASE_KEY'))
+KEY_URL = os.getenv("FIREBASE_KEY")
+key_data = json.loads(KEY_URL)
 cred = credentials.Certificate(key_data)
 
 firebase_admin.initialize_app(cred, {
