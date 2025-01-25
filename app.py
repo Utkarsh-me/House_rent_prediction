@@ -35,7 +35,7 @@ import json
 key_data = os.getenv("FIREBASE_KEY")
 
 # Replace escaped \n with actual newlines
-key_data = key_data.replace("\\n", "\n")
+#key_data = key_data.replace("\\n", "\n")
 
 # Convert to dictionary and initialize Firebase
 firebase_cred = json.loads(key_data)
