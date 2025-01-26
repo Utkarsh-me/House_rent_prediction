@@ -1,54 +1,21 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, request, jsonify, render_template
+from supabase import create_client, Client
 import pickle
 import numpy as np
-from flask import request
-import firebase_admin
-from firebase_admin import credentials, db
-import requests
 import os
-import json
 
-#FIREBASE_KEY_URL = "house-rent-prediction-43bd8-firebase-adminsdk-fbsvc-bec842c544.json"
-#response = requests.get(FIREBASE_KEY_URL)
-#if response.status_code == 200:
-#    key_data = response.json()
-#else:
-#    raise ValueError("Failed to load Firebase key from URL")
-    
-#cred = credentials.Certificate(key_data)
-
-#___________________________________________
-
-#FIREBASE_KEY_PATH = os.getenv("FIREBASE_KEY")
-#if not FIREBASE_KEY_PATH:
-#   raise ValueError("FIREBASE_KEY_PATH environment variable not set")
-#cred = credentials.Certificate(FIREBASE_KEY_PATH)
-
-#___________________________________________
-
-#key_url = os.environ.get('FIREBASE_KEY')
-#cred = credentials.Certificate(key_url)
-
-#___________________________________________
-
-key_data = os.getenv("FIREBASE_KEY")
-
-# Replace escaped \n with actual newlines
-#key_data = key_data.replace("\\n", "\n")
-
-# Convert to dictionary and initialize Firebase
-firebase_cred = json.loads(key_data)
-cred = credentials.Certificate(firebase_cred)
-
-
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://house-rent-prediction-43bd8-default-rtdb.asia-southeast1.firebasedatabase.app/'
-})
-
-model = pickle.load(open('house_rent.pkl', 'rb'))
-
+# Initialize Flask app
 app = Flask(__name__)
+
+# Supabase credentials
+SUPABASE_URL = os.getenv("https://ivarjhpbeasabwwtmvnx.supabase.co")  # Add your Supabase URL here
+SUPABASE_KEY = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml2YXJqaHBiZWFzYWJ3d3Rtdm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc4MjA3NDksImV4cCI6MjA1MzM5Njc0OX0.ZxUCDNIPBWLjJuN71fc7xlTdplOqNGRI2JPPpEjfW9U")  # Add your Supabase Service Role Key here
+
+# Initialize Supabase client
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
+
+# Load ML model
+model = pickle.load(open('house_rent.pkl', 'rb'))
 
 @app.route('/')
 def index():
@@ -73,35 +40,28 @@ def predict():
         prediction = model.predict(arr)
 
 
-        try:
-            ref = db.reference('predictions')
-            ref.push({
-                'property_type' : property_type,
-                'bhk' : bhk,
-                'size' : size,
-                'floor' : floor,
-                'area_type' : area_type,
-                'state' : state,
-                'furnishing_status' : furnishing_status,
-                'tenant_preferred' : tenant_preferred,
-                'bathrooms' : bathrooms,
-                'point_of_contact': point_of_contact,
-                'predicted_rent' : float(prediction[0])
-            })
+        data = {
+            'property_type': property_type,
+            'bhk': bhk,
+            'size': size,
+            'floor': floor,
+            'area_type': area_type,
+            'state': state,
+            'furnishing_status': furnishing_status,
+            'tenant_preferred': tenant_preferred,
+            'bathrooms': bathrooms,
+            'point_of_contact': point_of_contact,
+            'predicted_rent': float(prediction[0])
+        }
+        response = supabase.table("rent_prediction").insert(data).execute()
 
-            #return jsonify({'message': 'Data saved successfully!'}), 200
+        if response.error:
+            return f"An error occurred while saving to Supabase: {response.error.message}"
 
-            # Redirect or display a success message
-            return render_template('rent_res.html', prediction = prediction)
+        return render_template('rent_res.html', prediction=prediction)
 
-        except Exception as e:
-            return f"An error occurred: {e}"
-        
-    return render_template('rent_land.html')
-        
+    except Exception as e:
+        return f"An error occurred: {e}"
 
-
-
-if __name__=="__main__":
+if __name__ == "__main__":
     app.run(debug=True)
-
