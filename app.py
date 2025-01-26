@@ -3,6 +3,7 @@ from supabase import create_client, Client
 import pickle
 import numpy as np
 import os
+import json
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -56,8 +57,8 @@ def predict():
             }
             response = supabase.table("rent_prediction").insert(data).execute()
 
-        if response.error:
-            return f"An error occurred while saving to Supabase: {response.error.message}"
+        if response.status_code != 201:
+            return f"An error occurred while saving to Supabase: {response.json()}"
 
         return render_template('rent_res.html', prediction=prediction)
     except Exception as e:
