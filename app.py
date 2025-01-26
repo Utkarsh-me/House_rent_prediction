@@ -25,36 +25,36 @@ def index():
 def predict():
     try :
         if request.method == "POST":
-        property_type = (request.form['property_type'])
-        bhk = (request.form['bhk'])
-        size = (request.form['size'])
-        floor = (request.form['floor'])
-        area_type = (request.form['area_type'])
-        state = (request.form['state'])
-        furnishing_status = (request.form['furnishing_status'])
-        tenant_preferred = (request.form['tenant_preferred'])
-        bathrooms = (request.form['bathrooms'])
-        point_of_contact = (request.form['point_of_contact'])
+            property_type = (request.form['property_type'])
+            bhk = (request.form['bhk'])
+            size = (request.form['size'])
+            floor = (request.form['floor'])
+            area_type = (request.form['area_type'])
+            state = (request.form['state'])
+            furnishing_status = (request.form['furnishing_status'])
+            tenant_preferred = (request.form['tenant_preferred'])
+            bathrooms = (request.form['bathrooms'])
+            point_of_contact = (request.form['point_of_contact'])
         
         # Prepare input data for the model
-        arr = np.array([[property_type, bhk, size, floor, area_type, state, furnishing_status, tenant_preferred, bathrooms, point_of_contact]])
-        prediction = model.predict(arr)
+            arr = np.array([[property_type, bhk, size, floor, area_type, state, furnishing_status, tenant_preferred, bathrooms, point_of_contact]])
+            prediction = model.predict(arr)
 
 
-        data = {
-            'property_type': property_type,
-            'bhk': bhk,
-            'size': size,
-            'floor': floor,
-            'area_type': area_type,
-            'state': state,
-            'furnishing_status': furnishing_status,
-            'tenant_preferred': tenant_preferred,
-            'bathrooms': bathrooms,
-            'point_of_contact': point_of_contact,
-            'predicted_rent': float(prediction[0])
-        }
-        response = supabase.table("rent_prediction").insert(data).execute()
+            data = {
+                'property_type': property_type,
+                'bhk': bhk,
+                'size': size,
+                'floor': floor,
+                'area_type': area_type,
+                'state': state,
+                'furnishing_status': furnishing_status,
+                'tenant_preferred': tenant_preferred,
+                'bathrooms': bathrooms,
+                'point_of_contact': point_of_contact,
+                'predicted_rent': float(prediction[0])
+            }
+            response = supabase.table("rent_prediction").insert(data).execute()
 
         if response.error:
             return f"An error occurred while saving to Supabase: {response.error.message}"
