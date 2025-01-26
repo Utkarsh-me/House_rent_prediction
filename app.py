@@ -23,7 +23,8 @@ def index():
 
 @app.route("/predict", methods=['POST', 'GET'])
 def predict():
-    if request.method == "POST":
+    try :
+        if request.method == "POST":
         property_type = (request.form['property_type'])
         bhk = (request.form['bhk'])
         size = (request.form['size'])
@@ -59,7 +60,6 @@ def predict():
             return f"An error occurred while saving to Supabase: {response.error.message}"
 
         return render_template('rent_res.html', prediction=prediction)
-
     except Exception as e:
         return f"An error occurred: {e}"
 
