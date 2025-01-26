@@ -57,9 +57,6 @@ def predict():
             }
             response = supabase.table("rent_prediction").insert(data).execute()
 
-        if response.status_code != 201:
-            return f"An error occurred while saving to Supabase: {response.json()}"
-
         return render_template('rent_res.html', prediction=prediction)
     except Exception as e:
         return f"An error occurred: {e}"
